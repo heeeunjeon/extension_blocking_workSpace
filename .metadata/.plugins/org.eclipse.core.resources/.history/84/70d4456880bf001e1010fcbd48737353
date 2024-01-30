@@ -1,0 +1,27 @@
+package com.he.blocking.model.vo;
+
+import java.sql.Date;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor // 기본생성자
+@Setter
+@Getter
+@ToString
+public class exeBlockVo {
+	
+	   EXE_NO          NUMBER  NOT NULL PRIMARY KEY,
+		EXE_NM          VARCHAR2(200) NOT NULL,
+	    EXE_PATH        VARCHAR2(300),
+		EXE_TYPE        VARCHAR2(50),
+	    EXE_DEL_YN      VARCHAR2(4),
+		EXE_SAVE_DATE   DATE DEFAULT SYSDATE
+	private int exeNo; // 확장자 순번 
+	private String exeNm; // 확장자명 	
+	private String exePath;
+	private String exeType;
+	private String exeDelYn;
+	private Date exeSaveDate; 
+}

@@ -140,7 +140,7 @@
 		    <version>3.5.11</version>
 		</dependency>
 		
-		<!-- 스프링 MyBatis -->
+		<!-- 스프 MyBatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis-spring</artifactId>
@@ -162,7 +162,24 @@
 		    <scope>provided</scope>
 		</dependency>
 		
-		<!-- 파일 업로드 -->
+		<!-- 스프링 시큐리티 모듈 라이브러리들 (core, web, config) -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.7.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.7.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.7.3</version>
+		</dependency>
+		
+		<!-- 파일 업로드 관련 두개의 라이브러리 -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
 		    <artifactId>commons-fileupload</artifactId>
@@ -174,7 +191,7 @@
 		    <version>2.11.0</version>
 		</dependency>
 		
-		<!-- Ajax -->
+		<!-- Ajax 관련 두개의 라이브러리 -->
 		<dependency>
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <hr/>
 	<h1>하이 </h1>
 </body>
 </html>

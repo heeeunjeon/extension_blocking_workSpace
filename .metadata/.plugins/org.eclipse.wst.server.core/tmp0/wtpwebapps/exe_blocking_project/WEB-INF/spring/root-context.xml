@@ -4,5 +4,26 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
+	 	<!-- 어느 DB 에 접속할건지를 설정 -->
+	 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+	 	<property name="username" value="BLOCKINGUSR" />
+	 	<property name="password" value="BLOCKINGUSR" />
+	 </bean>
+	
+	 <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+	 	<!-- MyBatis 설정파일의 위치를 지정하여 설정값들을 가지고 오겠다. -->
+	 	<property name="configLocation" value="classpath:mybatis-config.xml" />
+	 	<!-- DB 연결을 위한 도구를 참조하겠다. -->
+	 	<property name="dataSource" ref="dataSource" />
+	 </bean>
+		
+	
+ 	 <bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+	 	<!-- 2단계에서 만들었던 SqlSessionFactoryBean 객체를 넘기면서 SqlSessionTemplate 객체를 생성하겠다. -->
+	 	<constructor-arg ref="sqlSessionFactory" />
+	 </bean>
 		
 </beans>

@@ -106,10 +106,9 @@
 			    exeNmArray.push(dataValue); // 배열에 값 추가
 			});
             var dataId = 'exeNm';
-            var exeNmStr = exeNmArray.join(','); // ','로 값들을 연결 
+            var exeNmStr = exeNmArray.join(','); // ,로 값들 연결 
 
             chkVal[dataId] = exeNmStr;
-           	console.log(chkVal);
 
             // 세션에 저장
             sessionStorage.setItem('fixChkVal', exeNmStr);
@@ -133,25 +132,37 @@
 
             var customExeInput = $('#customExe');
             var customExe = $('#customExe').val();
-            // '.'을 제거한 값을 가져옴
+            // . 제거한 값을 가져옴
             var clearCustomExe = customExe.replace(/\./g, '');
+
+            // 태그 중복 확인
+            if ($("#tagList li:contains('" + clearCustomExe + "')").length > 0) {
+                alert("이미 존재하는 확장자입니다.");
+                return; // 중복된 값이면 리턴
+            }
+
 
             $.ajax({
                 url: "/customExeSave.do",
                 type: 'get',
                 data: { exeNm: clearCustomExe },  
-                dataType : "Text",
+                dataType: "Text",
                 success: function (data) {
                     alert("저장하였습니다.");
                     customExeInput.val("");
                     
-                    var tag = {};
-                    var counter;
-                    for (counter = 0; counter < data.length && counter < 200; counter++) {
-                        tag[counter] = data[counter];
+                    // 태그의 개수
+                    var tagCount = $("#tagList li").length;
+
+                    // 태그의 개수가 200개보다 작을 때에만 새태그 추가
+                    if (tagCount < 200) {
+                        $("#tagList").append("<li class='tag-item'>" + clearCustomExe + "<span class='del-btn' id='"+ clearCustomExe +"' onclick='delCustom(\"" + clearCustomExe + "\")'>x</span></li>");
+                        
+                        // 현재까지 추가된 태그의 수 업데이트 
+                        $("#tagCount").text(tagCount + 1);
+                    } else {
+                        alert("최대 200개의 태그까지만 추가할 수 있습니다.");
                     }
-                    $("#tagList").append("<li class='tag-item'>" + clearCustomExe + "<span class='del-btn' id='"+ clearCustomExe +"' onclick='delCustom(\"" + clearCustomExe + "\")'>x</span></li>");
-                    // $("#tagCount").text(addCount); // 하나씩 추가될때마다 1씩 올라야함 
                 },
                 error: function () {
                     alert("error");
@@ -173,13 +184,16 @@
                     
                     // 화면에서 삭제
                     $('#' + exeNm).parent().remove();
+                    
+                    // 태그 개수
+                    var tagCount = $("#tagList li").length;
+                    // 삭제된 태그 수 반영 
+                    $("#tagCount").text(tagCount);
                 },
                 error: function () {
                     alert("error");
                 }
             });
-
-
         }
 
 

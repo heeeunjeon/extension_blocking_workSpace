@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="exeBlockMapper">
+
+
+	<insert id="saveFixedChk" parameterType="exeBlock">
+	/* 고정확장자 저장 */
+	INSERT INTO BLOCK_TABLE
+		( EXE_NO
+		, EXE_NM
+		, EXE_TYPE
+		, EXE_DEL_YN
+		, EXE_SAVE_DATE
+        , EXE_SAVE_YN
+		)
+	VALUES
+		( BLOCK_SEQ.NEXTVAL
+		, #{exeNm}
+		, #{exeType}
+		, 'N'
+		, SYSDATE
+		, 'Y'
+		)
+	</insert>
+	
+	<update id="updateFixedChk" parameterType="exeBlock">
+	/* 고정확장자 수정 */
+	UPDATE BLOCK_TABLE
+	   SET EXE_NM = #{exeNm}
+	 WHERE EXE_NO IN (SELECT EXE_NO
+	                    FROM BLOCK_TABLE
+	                   WHERE EXE_NM LIKE '%' || #{firstVal} || '%'
+	                     AND EXE_TYPE = '고정 확장자')
+	</update>
+	
+	<insert id="insertCustomExe" parameterType="exeBlock">
+	/* 커스텀확장자 저장 */
+	INSERT INTO BLOCK_TABLE
+		( EXE_NO
+		, EXE_NM
+		, EXE_TYPE
+		, EXE_DEL_YN
+		, EXE_SAVE_DATE
+        , EXE_SAVE_YN
+		)
+	VALUES
+		( BLOCK_SEQ.NEXTVAL
+		, #{exeNm}
+		, #{exeType}
+		, 'N'
+		, SYSDATE
+		, 'Y'
+		)
+	</insert>
+	
+	<delete id="deleteCustom" parameterType="exeBlock">
+	/* 커스텀 확장자 삭제 */
+	DELETE FROM BLOCK_TABLE
+	 WHERE EXE_NM = #{exeNm}
+	   AND EXE_TYPE = #{exeType}
+	</delete>
+	
+	
+</mapper>

@@ -34,7 +34,6 @@ INDEX VERSION 1.131+/Users/jeonheeeun/Documents/extension_blocking_workSpace/.me
 60725329.index
 3186253733.index
 3822982291.index
-1014781764.index
 2310261877.index
 2544512858.index
 2281449730.index

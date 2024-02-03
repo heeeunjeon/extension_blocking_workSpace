@@ -106,10 +106,9 @@
 			    exeNmArray.push(dataValue); // 배열에 값 추가
 			});
             var dataId = 'exeNm';
-            var exeNmStr = exeNmArray.join(','); // ','로 값들을 연결 
+            var exeNmStr = exeNmArray.join(','); // ,로 값들 연결 
 
             chkVal[dataId] = exeNmStr;
-           	console.log(chkVal);
 
             // 세션에 저장
             sessionStorage.setItem('fixChkVal', exeNmStr);
@@ -133,7 +132,7 @@
 
             var customExeInput = $('#customExe');
             var customExe = $('#customExe').val();
-            // '.'을 제거한 값을 가져옴
+            // . 제거한 값을 가져옴
             var clearCustomExe = customExe.replace(/\./g, '');
 
             // 태그 중복 확인
